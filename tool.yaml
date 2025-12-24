@@ -1,7 +1,7 @@
-name: file-read
+name: readfile
 version: 0.1.3
 description: Read and return the contents of a file
-entrypoint: bin/file-read.py
+entrypoint: bin/readfile.py
 author: dorcha-inc
 license: MIT
 repository: https://github.com/dorcha-inc/orla-tool-file-read

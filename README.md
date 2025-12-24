@@ -7,19 +7,19 @@ A file reading tool for orla that reads and returns the contents of a file.
 Install from the orla registry:
 
 ```bash
-orla install file-read
+orla install readfile
 ```
 
 This will install the latest version from the default registry. To install a specific version:
 
 ```bash
-orla install file-read@v0.1.0
+orla install readfile@v0.1.0
 ```
 
 Or to use a custom registry:
 
 ```bash
-orla install file-read --registry https://github.com/dorcha-inc/orla-registry
+orla install readfile --registry https://github.com/dorcha-inc/orla-registry
 ```
 
 ## Usage
@@ -53,5 +53,5 @@ To test locally before publishing:
 2. Create a git tag: `git tag v0.1.0`
 3. Push the tag to GitHub
 4. Ensure the tool is added to the registry's `registry.yaml` file
-5. Test installation: `orla install file-read`
+5. Test installation: `orla install readfile`
 
