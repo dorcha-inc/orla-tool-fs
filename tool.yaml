@@ -1,22 +1,121 @@
-name: readfile
-version: 0.1.4
-description: Read and return the contents of a file
-entrypoint: bin/readfile.py
+name: fs
+version: 0.2.0
+description: Comprehensive file system operations tool for reading, writing, listing, and managing files and directories
+entrypoint: bin/fs.py
 author: dorcha-inc
 license: MIT
-repository: https://github.com/dorcha-inc/orla-tool-file-read
+repository: https://github.com/dorcha-inc/orla-tool-fs
 keywords:
   - file
-  - read
   - filesystem
+  - directory
   - io
+  - read
+  - write
+  - list
 mcp:
   input_schema:
     type: object
     properties:
+      operation:
+        type: string
+        enum: ["read", "write", "list", "exists", "stat", "mkdir", "rm", "mv", "cp"]
+        description: The file system operation to perform
       path:
         type: string
-        description: Path to the file to read
+        description: Path to file or directory (required for read, write, list, exists, stat, mkdir, rm)
+      source:
+        type: string
+        description: Source path (required for mv, cp)
+      dest:
+        type: string
+        description: Destination path (required for mv, cp)
+      content:
+        type: string
+        description: Content to write (required for write operation)
+      recursive:
+        type: boolean
+        description: Perform operation recursively (for list, rm, cp)
+        default: false
+      parents:
+        type: boolean
+        description: Create parent directories (for mkdir)
+        default: false
+      create_dirs:
+        type: boolean
+        description: Create parent directories (for write)
+        default: false
     required:
-      - path
-
+      - operation
+  output_schema:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: Whether the operation succeeded
+      error:
+        type: string
+        description: Error message if success is false
+      content:
+        type: string
+        description: File contents (for read operation)
+      path:
+        type: string
+        description: Path that was operated on
+      source:
+        type: string
+        description: Source path (for mv, cp operations)
+      dest:
+        type: string
+        description: Destination path (for mv, cp operations)
+      items:
+        type: array
+        description: Directory listing items (for list operation)
+        items:
+          type: object
+          properties:
+            path:
+              type: string
+            name:
+              type: string
+            type:
+              type: string
+              enum: ["file", "directory"]
+            relative:
+              type: string
+              description: Relative path from listed directory (for recursive list)
+      count:
+        type: integer
+        description: Number of items in directory (for list operation)
+      exists:
+        type: boolean
+        description: Whether path exists (for exists operation)
+      is_file:
+        type: boolean
+        description: Whether path is a file (for exists, stat operations)
+      is_dir:
+        type: boolean
+        description: Whether path is a directory (for exists, stat operations)
+      size:
+        type: integer
+        description: File size in bytes (for stat operation)
+      mode:
+        type: string
+        description: File permissions in octal (for stat operation)
+      modified:
+        type: number
+        description: Modification time as Unix timestamp (for stat operation)
+      accessed:
+        type: number
+        description: Access time as Unix timestamp (for stat operation)
+      created:
+        type: number
+        description: Creation time as Unix timestamp (for stat operation)
+      is_symlink:
+        type: boolean
+        description: Whether path is a symlink (for stat operation)
+      message:
+        type: string
+        description: Informational message (e.g., "Directory already exists")
+    required:
+      - success
