@@ -13,7 +13,7 @@ orla install fs
 This will install the latest version from the default registry. To install a specific version:
 
 ```bash
-orla install fs@v0.2.0
+orla install fs@v0.3.0
 ```
 
 Or to use a custom registry:
@@ -222,7 +222,7 @@ All operations return a JSON response with a `success` field. If `success` is `f
 To test locally before publishing:
 
 1. Clone this repository
-2. Create a git tag: `git tag v0.2.0`
+2. Create a git tag: `git tag v0.3.0`
 3. Push the tag to GitHub
 4. Ensure the tool is added to the registry's `registry.yaml` file
 5. Test installation: `orla install fs`

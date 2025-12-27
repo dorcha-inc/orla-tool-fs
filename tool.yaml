@@ -1,5 +1,5 @@
 name: fs
-version: 0.2.1
+version: 0.3.0
 description: |
   Comprehensive file system operations tool. 
   
@@ -9,7 +9,7 @@ description: |
   - To list a directory: {"operation": "list", "path": "/path/to/dir"}
   - To read a file: {"operation": "read", "path": "/path/to/file"}
   - To check if path exists: {"operation": "exists", "path": "/path"}
-entrypoint: bin/fs.py
+entrypoint: bin/fs
 author: dorcha-inc
 license: MIT
 repository: https://github.com/dorcha-inc/orla-tool-fs
