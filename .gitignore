@@ -24,8 +24,9 @@ profile.cov
 go.work
 go.work.sum
 
-# Build output
-bin/
+# Build output - ignore everything in bin/ except .tool files
+bin/*
+!bin/*.tool
 
 # Environment files
 .env

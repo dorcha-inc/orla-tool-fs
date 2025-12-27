@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	go build -o bin/fs cmd/fs/main.go
+	go build -o bin/fs.tool cmd/fs/main.go
 
 .PHONY: test
 test:
@@ -18,7 +18,7 @@ format:
 
 .PHONY: clean
 clean:
-	rm -f bin/fs
+	rm -f bin/fs.tool
 	go clean ./...
 
 .PHONY: deps
@@ -42,12 +42,26 @@ bump-tools-yaml-version:
 
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null | sed 's/^v//' || echo "dev")
 .PHONY: publish
-publish: bump-tools-yaml-version
+publish: bump-tools-yaml-version build
 	@if [ "$(VERSION)" = "dev" ]; then \
 		echo "Error: Cannot publish 'dev' version. Set VERSION explicitly: make publish VERSION=0.3.0"; \
 		exit 1; \
+	fi
+	@echo "Building binary for release..."
+	@if [ ! -f bin/fs.tool ]; then \
+		echo "Error: Binary build failed"; \
+		exit 1; \
+	fi
+	@echo "Staging binary for commit..."
+	@git add -f bin/fs.tool tool.yaml
+	@if ! git diff --cached --quiet; then \
+		echo "Committing changes for v$(VERSION)..."; \
+		git commit -m "Release v$(VERSION)"; \
 	fi
 	@echo "Creating tag v$(VERSION)..."
 	git tag v$(VERSION)
 	@echo "Pushing tag v$(VERSION)..."
 	git push origin v$(VERSION)
+	@echo "Pushing commits..."
+	git push origin main
+	@echo "Release v$(VERSION) published successfully!"
