@@ -1,0 +1,12 @@
+# Codecov configuration for orla-tool-fs
+# See https://docs.codecov.com/docs/codecov-yaml
+
+codecov:
+  require_ci_to_pass: false
+
+coverage:
+  # Exclude cmd/ (CLI applications)
+  # Using "folder/" pattern ignores the folder and all its contents recursively
+  ignore:
+    - "cmd/"
+

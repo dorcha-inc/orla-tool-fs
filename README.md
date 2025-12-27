@@ -2,6 +2,14 @@
 
 A comprehensive file system operations tool for orla that provides reading, writing, listing, and managing files and directories.
 
+---
+[![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)](https://golang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dorcha-inc/orla-tool-fs)](https://goreportcard.com/report/github.com/dorcha-inc/orla-tool-fs)
+[![Build](https://github.com/dorcha-inc/orla-tool-fs/actions/workflows/build.yml/badge.svg)](https://github.com/dorcha-inc/orla-tool-fs/actions/workflows/build.yml)
+[![Coverage](https://codecov.io/gh/dorcha-inc/orla-tool-fs/branch/main/graph/badge.svg)](https://codecov.io/gh/dorcha-inc/orla-tool-fs)
+---
+
 ## Installation
 
 Install from the orla registry:
@@ -13,7 +21,7 @@ orla install fs
 This will install the latest version from the default registry. To install a specific version:
 
 ```bash
-orla install fs@v0.3.0
+orla install --version v0.3.0
 ```
 
 Or to use a custom registry:
